@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwtjkonsprre0"]
+
+[ext_resource type="PackedScene" uid="uid://bo6sn7rrs42xp" path="res://Assets/Models/Dungeon/gltf/floor_tile_small.gltf.glb" id="1_311jm"]
+[ext_resource type="PackedScene" uid="uid://cajc6e143gba0" path="res://Assets/Models/Dungeon/gltf/wall.gltf.glb" id="2_30q81"]
+[ext_resource type="PackedScene" uid="uid://ci6es3m8xjrk5" path="res://Assets/Models/Dungeon/gltf/stairs_wood_decorated.gltf.glb" id="3_6wq62"]
+[ext_resource type="PackedScene" uid="uid://hhbpa8jha4sp" path="res://Assets/Models/Dungeon/gltf/wall_corner.gltf.glb" id="4_nd6al"]
+[ext_resource type="PackedScene" uid="uid://carrxj1s51ka3" path="res://Assets/Models/Dungeon/gltf/wall_Tsplit.gltf.glb" id="5_yfxog"]
+[ext_resource type="PackedScene" uid="uid://dyrfhc47djhe6" path="res://Assets/Models/Dungeon/gltf/chest.glb" id="6_cu8fo"]
+[ext_resource type="PackedScene" uid="uid://cpe1b3xn2f5vq" path="res://Assets/Models/Dungeon/gltf/wall_open_scaffold.gltf.glb" id="7_0hxgc"]
+[ext_resource type="PackedScene" uid="uid://b4e2fraqptfbq" path="res://Assets/Models/Dungeon/gltf/wall_doorway.glb" id="8_4gqs8"]
+
+[node name="Tiles" type="Node3D"]
+
+[node name="floor_tile_small_gltf" parent="." instance=ExtResource("1_311jm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 10)
+
+[node name="wall_gltf" parent="." instance=ExtResource("2_30q81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98282, 0, 3)
+
+[node name="stairs_wood_decorated_gltf" parent="." instance=ExtResource("3_6wq62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.0475712, 2.49319)
+
+[node name="wall_corner_gltf" parent="." instance=ExtResource("4_nd6al")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 3)
+
+[node name="wall_Tsplit_gltf" parent="." instance=ExtResource("5_yfxog")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 8)
+
+[node name="chest2" parent="." instance=ExtResource("6_cu8fo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 10)
+
+[node name="wall_open_scaffold_gltf" parent="." instance=ExtResource("7_0hxgc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 14)
+
+[node name="wall_doorway2" parent="." instance=ExtResource("8_4gqs8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 14)

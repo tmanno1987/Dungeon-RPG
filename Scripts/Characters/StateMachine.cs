@@ -6,11 +6,11 @@ public partial class StateMachine : Node
     [ExportGroup("State Machine")]
     [Export] private Node currentState;
     [Export] private Node[] states;
-    private Player player;
+    //private Player player;
 
     public override void _Ready()
     {
-        currentState.Notification(5001);
+        currentState.Notification(GC.NOTIFY_ENTER_STATE);
     }
 
     public void SwitchState<T>() 
@@ -26,7 +26,8 @@ public partial class StateMachine : Node
         // escape if the value of newState is never adjusted
         if (newState == null) { return; }
 
+        currentState.Notification(GC.NOTIFY_EXIT_STATE);
         currentState = newState;
-        currentState.Notification(5001);
+        currentState.Notification(GC.NOTIFY_ENTER_STATE);
     }
 }
