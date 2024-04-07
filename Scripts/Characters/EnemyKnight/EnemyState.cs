@@ -20,4 +20,9 @@ public abstract partial class EnemyState : CharacterState
         player.MoveAndSlide();
         player.Flip();
     }
+
+    protected void HandleChaseAreaBodyEntered(Node3D body)
+    {
+        player.StateMachine.SwitchState<EnemyChaseState>();
+    }
 }

@@ -18,6 +18,7 @@ public partial class EnemyPatrolState : EnemyState
 
         player.AgentNode.NavigationFinished += HandleNavigationFinished;
         idleTimer.Timeout += HandleTimeout;
+        player.ChaseAreaNode.BodyEntered += HandleChaseAreaBodyEntered;
     }
 
     private void HandleTimeout()
@@ -48,5 +49,6 @@ public partial class EnemyPatrolState : EnemyState
     {
         player.AgentNode.NavigationFinished -= HandleNavigationFinished;
         idleTimer.Timeout -= HandleTimeout;
+        player.ChaseAreaNode.BodyEntered -= HandleChaseAreaBodyEntered;
     }
 }
