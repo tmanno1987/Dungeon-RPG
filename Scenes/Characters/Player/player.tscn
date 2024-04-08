@@ -1,9 +1,10 @@
-[gd_scene load_steps=90 format=3 uid="uid://devrbe7d47jwr"]
+[gd_scene load_steps=94 format=3 uid="uid://devrbe7d47jwr"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.cs" id="1_ejr72"]
 [ext_resource type="Texture2D" uid="uid://d026wydqaruwf" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_000.png" id="1_slkjb"]
 [ext_resource type="Texture2D" uid="uid://d2nomgrmvovi1" path="res://Assets/Sprites/Characters/Player/Running/Running_006.png" id="1_u00v6"]
 [ext_resource type="Texture2D" uid="uid://d1f4ua0xbw0tf" path="res://Assets/Sprites/Characters/Player/Kicking/Kicking_000.png" id="2_2pgl2"]
+[ext_resource type="Script" path="res://Scripts/Resource/StatResource.cs" id="2_quvlu"]
 [ext_resource type="Texture2D" uid="uid://baibhddw58bfj" path="res://Assets/Sprites/Characters/Player/Dying/Dying_014.png" id="2_s1lhx"]
 [ext_resource type="Texture2D" uid="uid://ccwkbron5ge6x" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_001.png" id="2_vn2vx"]
 [ext_resource type="Texture2D" uid="uid://c5isqnka4ru6c" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_002.png" id="3_8irx3"]
@@ -81,6 +82,18 @@
 [ext_resource type="Texture2D" uid="uid://djhnj0av8rv78" path="res://Assets/Sprites/Characters/Player/Slashing/Slashing_011.png" id="76_78k8m"]
 [ext_resource type="PackedScene" uid="uid://cksuqpeu6hgu0" path="res://Scenes/Characters/state_machine.tscn" id="77_pnxn0"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerAttackState.cs" id="81_udjyw"]
+
+[sub_resource type="Resource" id="Resource_tal5y"]
+script = ExtResource("2_quvlu")
+StatType = 0
+StatValue = 100.0
+MaxStatValue = 100.0
+
+[sub_resource type="Resource" id="Resource_g0ik1"]
+script = ExtResource("2_quvlu")
+StatType = 2
+StatValue = 5.0
+MaxStatValue = 5.0
 
 [sub_resource type="Animation" id="Animation_xwdeb"]
 resource_name = "Dash"
@@ -194,19 +207,24 @@ _data = {
 radius = 0.353262
 height = 1.52264
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayer", "PlayerSprite", "StateMachine")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gj2rl"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayer", "PlayerSprite", "StateMachine", "HurtBox")]
 collision_layer = 2
 collision_mask = 5
 floor_max_angle = 1.13446
 floor_snap_length = 0.2
 script = ExtResource("1_ejr72")
+stats = Array[Object]([SubResource("Resource_tal5y"), SubResource("Resource_g0ik1")])
 AnimPlayer = NodePath("AnimationPlayer")
 PlayerSprite = NodePath("Sprite3D")
 StateMachine = NodePath("StateMachine")
+HurtBox = NodePath("HurtBox")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 pixel_size = 0.0025
-texture = ExtResource("2_2pgl2")
+texture = ExtResource("1_slkjb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -214,7 +232,7 @@ libraries = {
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.389, 0, 0, 0, 1, 0, 0, 0, 1.389, 0, 0.0557544, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0557544, 0)
 shape = SubResource("CapsuleShape3D_nioen")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("77_pnxn0")]
@@ -242,3 +260,20 @@ comboTimer = NodePath("ComboTimer")
 [node name="ComboTimer" type="Timer" parent="StateMachine/AttackState"]
 wait_time = 2.0
 one_shot = true
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693579, 0, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0820074, -0.250475, 0)
+shape = SubResource("BoxShape3D_gj2rl")
+
+[node name="HurtBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0557544, 0)
+shape = SubResource("CapsuleShape3D_nioen")

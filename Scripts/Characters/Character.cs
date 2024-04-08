@@ -1,12 +1,17 @@
 using Godot;
 using System;
+using System.Linq;
 
 public abstract partial class Character : CharacterBody3D
 {
+    [Export] private StatResource[] stats;
+
     [ExportGroup("Required Nodes")]
     [Export] public AnimationPlayer AnimPlayer { get; private set; }
     [Export] public Sprite3D PlayerSprite { get; private set; }
     [Export] public StateMachine StateMachine { get; private set; }
+    //[Export] public Area3D HitBox { get; private set; }
+    [Export] public Area3D HurtBox { get; private set; }
 
     [ExportGroup("AI Nodes")]
     [Export] public Path3D PathNode { get; private set; }
@@ -15,6 +20,22 @@ public abstract partial class Character : CharacterBody3D
     [Export] public Area3D AttackAreaNode { get; private set; }
 
     protected Vector2 direction = new();
+
+    public override void _Ready()
+    {
+        HurtBox.AreaEntered += HandleHurtBoxEnter;
+    }
+
+    private void HandleHurtBoxEnter(Area3D area)
+    {
+        StatResource health = GetStatResource(Stat.Health);
+        GD.Print(health.StatValue);
+    }
+
+    private StatResource GetStatResource(Stat stat)
+    {
+        return stats.Where((element) => element.StatType == stat).FirstOrDefault();
+    }
 
     public void Flip()
     {
