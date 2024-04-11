@@ -26,6 +26,7 @@ public partial class PlayerAttackState : PlayerState
         comboCounter++;
         comboCounter = Mathf.Wrap(comboCounter, 1, maxComboCount);
 
+        player.ToggleHitbox(true);
         player.StateMachine.SwitchState<PlayerIdleState>();
     }
 
@@ -33,5 +34,16 @@ public partial class PlayerAttackState : PlayerState
     {
         player.AnimPlayer.AnimationFinished -= HandleAnimFinished;
         comboTimer.Start();
+    }
+
+    private void PerformHit()
+    {
+        // Process a hitbox-hurtbox collision
+        Vector3 newPos = player.PlayerSprite.FlipH ? Vector3.Left : Vector3.Right;
+        float distanceMultiplier = 0.75f;
+        newPos *= distanceMultiplier;
+
+        player.HitBox.Position = newPos;
+        player.ToggleHitbox(false);
     }
 }

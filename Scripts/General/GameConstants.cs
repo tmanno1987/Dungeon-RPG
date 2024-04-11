@@ -6,7 +6,9 @@ public class GC
     public const string ANIM_DASH = "Dash";
     public const string ANIM_ATTACK = "Attack";
     public const string ANIM_DEATH = "Death";
-    public const string ANIM_TAKE_HIT = "TakeHit";
+    public const string ANIM_EXPAND = "Expand";
+    public const string ANIM_EXPLOSION = "Explosion";
+    public const string ANIM_STUN = "Stun";
 
     // Inputs
     public const string INPUT_MOVE_FORWARD = "MoveForward";
@@ -15,6 +17,8 @@ public class GC
     public const string INPUT_MOVE_RIGHT = "MoveRight";
     public const string INPUT_DASH = "PlayerDash";
     public const string INPUT_ATTACK = "Attack";
+    public const string INPUT_PAUSE = "Pause";
+    public const string INPUT_INTERACT = "Interact";
 
     // Notifications
     public const int NOTIFY_ENTER_STATE = 5001;
