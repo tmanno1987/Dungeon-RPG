@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://jfbuxkpw8egb"]
+[gd_scene load_steps=39 format=3 uid="uid://jfbuxkpw8egb"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/Main.cs" id="1_55xqj"]
 [ext_resource type="PackedScene" uid="uid://devrbe7d47jwr" path="res://Scenes/Characters/Player/player.tscn" id="2_72v6u"]
@@ -8,6 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://dxse284dmfwgc" path="res://Scenes/General/ui.tscn" id="5_to5wb"]
 [ext_resource type="Script" path="res://Scripts/General/Camera.cs" id="6_e8v6n"]
 [ext_resource type="Script" path="res://Scripts/Resource/StatResource.cs" id="7_25uei"]
+[ext_resource type="PackedScene" uid="uid://btgrnj2lai78y" path="res://Scenes/Reward/treasure_chest.tscn" id="9_b5hoh"]
+[ext_resource type="Resource" uid="uid://cx3rho46585sq" path="res://Resources/Rewards/chest_str_10.tres" id="10_7foy2"]
+[ext_resource type="Texture2D" uid="uid://cgb5su2130qbh" path="res://Assets/Sprites/UI/UI ElementUI 13.png" id="10_lbo8g"]
+[ext_resource type="Resource" uid="uid://wq4iomc41j3q" path="res://Resources/Rewards/chest_health_50.tres" id="11_6i4y4"]
+[ext_resource type="Script" path="res://Scripts/Reward/RewardResource.cs" id="11_hfy02"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8str"]
 size = Vector3(1, 4.38278, 7.15671)
@@ -156,32 +161,32 @@ StatType = 0
 MaxStatValue = 20.0
 StatValue = 20.0
 
+[sub_resource type="Resource" id="Resource_2itgy"]
+script = ExtResource("11_hfy02")
+SpriteTexture = ExtResource("10_lbo8g")
+Description = "+10 Strength"
+TargetStat = 2
+Amount = 10.0
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_55xqj")
 
 [node name="Player" parent="." instance=ExtResource("2_72v6u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72431, 1.75226, 1.84914)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.0582, 1.75226, 1.84914)
 
 [node name="Environment" type="Node3D" parent="."]
 
-[node name="InvisibleWall" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.1611, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/InvisibleWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.222269, 2.41797, 2.52558)
-shape = SubResource("BoxShape3D_v8str")
-
-[node name="InvisibleWall2" type="StaticBody3D" parent="Environment"]
+[node name="InvWall" type="StaticBody3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.902725, -0.217199, 2.01063, -20.9173)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/InvisibleWall2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/InvWall"]
 transform = Transform3D(1.13248, 0, 0, 0, 1.13248, 0, 0, 0, 1.13248, 0.187231, 1.50899, 5.07235)
 shape = SubResource("BoxShape3D_v8str")
 
-[node name="InvisibleWall3" type="StaticBody3D" parent="Environment"]
+[node name="InvWall2" type="StaticBody3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.912737, 3.82667, 2.01063, -20.9173)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/InvisibleWall3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/InvWall2"]
 transform = Transform3D(1.13248, 0, 0, 0, 1.13248, 0, 0, 0, 1.13248, 0.187231, 1.50899, 5.07235)
 shape = SubResource("BoxShape3D_v8str")
 
@@ -314,3 +319,19 @@ transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 
 script = ExtResource("6_e8v6n")
 target = NodePath("../Player")
 positionFromTarget = Vector3(0, 2, 6)
+
+[node name="TreasureChest" parent="." instance=ExtResource("9_b5hoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14147, 5.55321, -47.2875)
+reward = ExtResource("10_7foy2")
+
+[node name="TreasureChest2" parent="." instance=ExtResource("9_b5hoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.1876, 1.54787, -20.4882)
+reward = ExtResource("11_6i4y4")
+
+[node name="TreasureChest3" parent="." instance=ExtResource("9_b5hoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.4967, 1.56994, -24.7091)
+reward = ExtResource("11_6i4y4")
+
+[node name="TreasureChest4" parent="." instance=ExtResource("9_b5hoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2806, 1.58984, -1.80526)
+reward = SubResource("Resource_2itgy")

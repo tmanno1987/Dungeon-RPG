@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RewardResource" load_steps=3 format=3 uid="uid://cx3rho46585sq"]
+
+[ext_resource type="Texture2D" uid="uid://cgb5su2130qbh" path="res://Assets/Sprites/UI/UI ElementUI 13.png" id="1_1dx52"]
+[ext_resource type="Script" path="res://Scripts/Reward/RewardResource.cs" id="2_1ssee"]
+
+[resource]
+script = ExtResource("2_1ssee")
+SpriteTexture = ExtResource("1_1dx52")
+Description = "+10 Strength!"
+TargetStat = 2
+Amount = 10.0
